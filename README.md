@@ -14,7 +14,7 @@ The project combines advanced **signal processing** with a **Kolmogorov-Arnold N
   - Adaptive splines with grid size 8 and spline order 4  
 - **Evaluation**  
   - Repeated train/validation/test splits for robust performance estimation  
-  - Metrics: Accuracy, AUROC, Precision, Recall, F1-score, Specificity  
+  - Metrics: Accuracy, AUROC, Precision, Recall  
 - **Results**  
   - ~81.7% accuracy at **segment level**  
   - ~86.5% accuracy at **subject level**
