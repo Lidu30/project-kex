@@ -46,7 +46,7 @@ This project was developed as part of my bachelor’s thesis in Computer Science
 
 ## ⚙️ Installation
 
-You can install the project using **Conda (recommended)** or **pip**.
+You can set up the project environment using **Conda (recommended)** or install all dependencies manually using **pip**.
 
 ---
 
