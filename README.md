@@ -3,7 +3,7 @@
 This repository contains an end-to-end machine learning pipeline for **EEG-based classification of schizophrenia vs. healthy subjects**.  
 The project integrates advanced **signal processing**, **time–frequency feature extraction**, **channel-wise PCA**, and a modern **Kolmogorov–Arnold Network (KAN)** neural architecture (PyKAN + PyTorch).
 
-This project was developed as part of a research study in machine learning and neural signal analysis.
+This project was developed as part of my bachelor’s thesis in Computer Science
 
 ---
 
