@@ -1,35 +1,147 @@
-# EEG Classification with Kolmogorov-Arnold Networks (KAN)
+# EEG Classification Using Kolmogorov–Arnold Networks (KAN)
 
-This repository implements an end-to-end machine learning pipeline for **EEG-based classification of schizophrenia vs. healthy subjects**.  
-The project combines advanced **signal processing** with a **Kolmogorov-Arnold Network (KAN)** model, showcasing data preprocessing, feature engineering, and deep learning integration in PyTorch.
+This repository contains an end-to-end machine learning pipeline for **EEG-based classification of schizophrenia vs. healthy subjects**.  
+The project integrates advanced **signal processing**, **time–frequency feature extraction**, **channel-wise PCA**, and a modern **Kolmogorov–Arnold Network (KAN)** neural architecture (PyKAN + PyTorch).
 
+This project was developed as part of a research study in machine learning and neural signal analysis.
 
-## 🚀 Project Highlights
-- **Preprocessing pipeline**  
-  - Bandpass filtering with a 4th-order Butterworth filter (0.5–45 Hz)  
-  - Short-Time Fourier Transform (STFT) for time–frequency representation  
-  - Channel-wise PCA for dimensionality reduction  
-- **Modeling**  
-  - Lightweight KAN architecture (PyKAN + PyTorch)  
-  - Adaptive splines with grid size 8 and spline order 4  
-- **Evaluation**  
-  - Repeated train/validation/test splits for robust performance estimation  
-  - Metrics: Accuracy, AUROC, Precision, Recall  
-- **Results**  
-  - ~81.7% accuracy at **segment level**  
-  - ~86.5% accuracy at **subject level**
+---
 
+## 🚀 Key Features
+
+### 🧠 EEG Preprocessing Pipeline
+- 4th-order **Butterworth bandpass filter** (0.5–45 Hz)  
+- Segmentation of raw EEG into fixed windows (12 seconds @ 128 Hz)  
+- **Short-Time Fourier Transform (STFT)**  
+- **Channel-wise PCA** for dimensionality reduction  
+- Produces a compact feature vector per EEG segment (~3000 features)
+
+### 🤖 Kolmogorov–Arnold Network (KAN)
+- Implemented using the **PyKAN** library  
+- Spline-based neurons with:
+  - Grid size = 8  
+  - Spline order = 4  
+- Network architecture:  
+  **Input → 40 → 80 → 40 → Output (2 classes)**
+
+### 📊 Evaluation
+- Multiple repeated train/validation/test runs  
+- Segment-level and subject-level classification  
+- Metrics include:
+  - Accuracy  
+  - AUROC  
+  - Precision  
+  - Recall  
+
+### 🏆 Example Results
+- **Segment-level accuracy:** ~81.7%  
+- **Subject-level accuracy:** ~86.5%
+
+---
 
 ## 📂 Repository Structure
-├── channelpca.py # Data loading, preprocessing, STFT, PCA, dataset creation
-├── plotfinal.py # Training & evaluation loop with repeated runs
-├── plot_file.py #
+
+├── channelpca.py # EEG loading, filtering, STFT, PCA, and dataset generation
+├── plotfinal.py # Main KAN training & evaluation pipeline
+├── plot_file.py # Auxiliary plotting utilities
+├── requirements.txt # Python dependencies for PyKAN + scientific stack
+└── README.md # Project documentation
+
+
+---
 
 ## ⚙️ Installation
-Clone the repository and install dependencies:
+
+You can install the project using **Conda (recommended)** or **pip**.
+
+---
+
+### 🔹 Option 1 — Conda Environment (Recommended)
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+conda create --name eegkan python=3.9.7
+conda activate eegkan
 pip install -r requirements.txt
+
+All required versions (PyTorch 2.2.2, numpy 1.24.4, etc.) are included.
+
+🔹 Option 2 — Manual Installation
+pip install pykan
+pip install numpy==1.24.4 matplotlib==3.6.2 scikit_learn==1.1.3 sympy==1.11.1 \
+            torch==2.2.2 pandas==2.0.1 tqdm pyyaml seaborn
+
+📄 Dataset Format
+
+This project uses a public EEG dataset containing recordings from:
+
+84 subjects (53 healthy, 31 schizophrenia)
+
+16-channel EEG
+
+128 Hz sampling rate
+
+~60 seconds per subject
+
+Stored in .eea format (shape: 16 × 7680 samples)
+
+The dataset is publicly available at:
+
+🔗 http://brain.bio.msu.ru/eeg_schizophrenia.htm
+
+The pipeline automatically:
+
+Segments each EEG file into 5 windows
+
+Applies filtering
+
+Computes STFT
+
+Performs channel-wise PCA
+
+Builds train/validation/test datasets
+
+▶️ Running the Model
+
+Example command:
+
+python plotfinal.py \
+    --healthy_dir healthy \
+    --schizophrenia_dir schiz \
+    --epochs 25 \
+    --batch_size 25 \
+    --num_runs 10
+
+Available Arguments
+--healthy_dir            Path to folder with healthy EEG subjects
+--schizophrenia_dir      Path to folder with schizophrenia subjects
+--epochs                 Training epochs per run
+--batch_size             Batch size
+--num_runs               Number of repeated runs
+--test_split_ratio       Test portion (default: 0.2)
+--validation_ratio       Validation split inside train set (default: 0.2)
+--hidden_size            KAN hidden layer width
+--grid_size              KAN spline grid size
+--spline_order           KAN spline order
+
+📊 Output Files
+
+Results are saved automatically to:
+
+./Results/Schizophrenia_ValidatedRuns/
+
+
+This includes:
+
+Accuracy, AUROC, Precision, Recall
+
+Confusion matrices
+
+ROC curves
+
+Precision–Recall curves
+
+Summary tables
+
+Boxplots of aggregated performance
+
 

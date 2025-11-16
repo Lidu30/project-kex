@@ -1,0 +1,14 @@
+--- Summary Across 10 Runs (Test Set Performance) ---
+
+Parameters: {'healthy_dir': 'healthy', 'schizophrenia_dir': 'schiz', 'output_dir': './Results/Schizophrenia_ValidatedRuns/', 'batch_size': 25, 'epochs': 25, 'hidden_size': 40, 'learning_rate': 0.0001, 'weight_decay': 0.0005, 'grid_size': 8, 'spline_order': 4, 'num_runs': 10, 'test_split_ratio': 0.2, 'validation_ratio': 0.2}
+
+Segment-Level Performance (Mean +/- Std Dev):
+  Accuracy:  0.8165 +/- 0.0450
+  AUROC:     0.8828 +/- 0.0401
+  Precision: 0.8262 +/- 0.0628
+  Recall:    0.8378 +/- 0.0872
+Subject-Level Performance (Mean +/- Std Dev - Estimated):
+  Accuracy:  0.8647 +/- 0.0529
+  AUROC:     0.9097 +/- 0.0312
+  Precision: 0.8835 +/- 0.0754
+  Recall:    0.8778 +/- 0.1444
