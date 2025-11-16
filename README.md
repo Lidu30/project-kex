@@ -33,12 +33,6 @@ This project was developed as part of my bachelor’s thesis in Computer Science
   - Precision  
   - Recall  
 
-### 🏆 Example Results
-- **Segment-level accuracy:** ~81.7%  
-- **Subject-level accuracy:** ~86.5%
-
----
-
 ## 📂 Repository Structure
 
 ├── channelpca.py # EEG loading, filtering, STFT, PCA, and dataset generation
@@ -62,6 +56,7 @@ You can install the project using **Conda (recommended)** or **pip**.
 conda create --name eegkan python=3.9.7
 conda activate eegkan
 pip install -r requirements.txt
+
 
 All required versions (PyTorch 2.2.2, numpy 1.24.4, etc.) are included.
 
@@ -103,7 +98,6 @@ Builds train/validation/test datasets
 ▶️ Running the Model
 
 Example command:
-
 python plotfinal.py \
     --healthy_dir healthy \
     --schizophrenia_dir schiz \
@@ -111,37 +105,11 @@ python plotfinal.py \
     --batch_size 25 \
     --num_runs 10
 
-Available Arguments
---healthy_dir            Path to folder with healthy EEG subjects
---schizophrenia_dir      Path to folder with schizophrenia subjects
---epochs                 Training epochs per run
---batch_size             Batch size
---num_runs               Number of repeated runs
---test_split_ratio       Test portion (default: 0.2)
---validation_ratio       Validation split inside train set (default: 0.2)
---hidden_size            KAN hidden layer width
---grid_size              KAN spline grid size
---spline_order           KAN spline order
-
 📊 Output Files
 
 Results are saved automatically to:
 
 ./Results/Schizophrenia_ValidatedRuns/
 
-
-This includes:
-
-Accuracy, AUROC, Precision, Recall
-
-Confusion matrices
-
-ROC curves
-
-Precision–Recall curves
-
-Summary tables
-
-Boxplots of aggregated performance
 
 
